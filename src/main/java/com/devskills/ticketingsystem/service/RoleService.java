@@ -1,4 +1,4 @@
-package com.devskills.ticketingsystem.repository;
+package com.devskills.ticketingsystem.service;
 
 import java.util.List;
 

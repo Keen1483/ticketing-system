@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User save(User user) {
+		System.out.println(user);
 		if (user.getEmail() == null) {
 			throw new BadContentException("Please, provide email for this user: " + user);
 		} else {
@@ -57,6 +58,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 				throw new BadContentException("Provided username or email already exist");
 			} else {
 				user.setUsername(username);
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
 				user.getRoles().add(roleRepo.findByName("ROLE_USER").get());
 				log.info("Saving new user {} in the database", user.getUsername());
 				return userRepo.save(user);

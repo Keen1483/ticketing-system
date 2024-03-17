@@ -9,8 +9,8 @@ import com.devskills.ticketingsystem.exception.BadContentException;
 import com.devskills.ticketingsystem.exception.ResourceNotFoundException;
 import com.devskills.ticketingsystem.model.Role;
 import com.devskills.ticketingsystem.repository.RoleRepository;
-import com.devskills.ticketingsystem.repository.RoleService;
 import com.devskills.ticketingsystem.repository.UserRepository;
+import com.devskills.ticketingsystem.service.RoleService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +55,14 @@ public class RoleServiceImpl implements RoleService {
 			if (role.getName().matches("^((?!ROLE)(?!ROLE_)[A-Z0-9_])+$")) {
 				log.info("Saving new role {} in the database", role.getName());
 				role.setName("ROLE_" + role.getName());
-				return roleRepo.save(role);
+				
+				Optional<Role> optionalRole = roleRepo.findByName(role.getName());
+				if(optionalRole.isPresent()) {
+					log.info("Role with name {} already exist", role.getName());
+					throw new BadContentException("Role with name " + role.getName() + " already exist");
+				} else {
+					return roleRepo.save(role);
+				}
 			} else {
 				log.error("Role {} is in a bad format", role.getName());
 				throw new BadContentException("Role " + role.getName() + " is in a bad format");

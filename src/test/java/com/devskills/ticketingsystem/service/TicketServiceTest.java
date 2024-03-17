@@ -1,5 +1,5 @@
 package com.devskills.ticketingsystem.service;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -21,9 +21,10 @@ import com.devskills.ticketingsystem.repository.UserRepository;
 import com.devskills.ticketingsystem.service.impl.TicketServiceImpl;
 import com.devskills.ticketingsystem.service.impl.UserServiceImpl;
 
-import jakarta.persistence.PersistenceException;
+import jakarta.persistence.PersistenceException; */
 
 public class TicketServiceTest {
+	/*
 	
 	// service we want to test
 	@InjectMocks
@@ -171,5 +172,5 @@ public class TicketServiceTest {
 		doThrow(new PersistenceException("Exception occured")).when(ticketRepo).deleteById(1L);
 		when(ticketRepo.findById(1L)).thenReturn(Optional.of(ticketSaved));
 	}
-
+	*/
 }

@@ -99,6 +99,7 @@ public class UserController {
 	)
 	@PostMapping("")
 	public ResponseEntity<User> CreateUser(@RequestBody User user) {
+		System.out.println(user);
 		//URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/users").toUriString());
 		//return ResponseEntity.created(uri).body(userService.save(user));
 		return ResponseEntity.created(null).body(userService.save(user));

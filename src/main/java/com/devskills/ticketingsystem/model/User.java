@@ -21,7 +21,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "User", schema = "public")
+@Table(name = "Users", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,6 +37,7 @@ public class User {
 	@Column(nullable = false, unique=true)
 	private String email;
 	
+	@Column(nullable = false)
 	private String password;
 	
 	@ManyToMany(fetch=EAGER)
@@ -48,7 +49,7 @@ public class User {
 			orphanRemoval = true,
 			fetch = LAZY)
 	private Set<Ticket> tickets = new HashSet<>();
-	
+	/*
 	public User(String username, String email) {
 		this.username = username;
 		this.email = email;
@@ -58,6 +59,19 @@ public class User {
 		this.id = id;
 		this.username = username;
 		this.email = email;
+	}*/
+	
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public User(Long id, String username, String email, String password) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
 	}
 	
 	// Add and Remove ticket

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devskills.ticketingsystem.model.Role;
-import com.devskills.ticketingsystem.repository.RoleService;
+import com.devskills.ticketingsystem.service.RoleService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,9 +38,9 @@ public class RoleController {
 	}
 	
 	// POST METHODS
-	@PostMapping("/save")
+	@PostMapping("")
 	public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/roles/save").toUriString());
+		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/roles").toUriString());
 		return ResponseEntity.created(uri).body(roleService.saveRole(role));
 	}
 	

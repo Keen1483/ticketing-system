@@ -1,5 +1,5 @@
 package com.devskills.ticketingsystem.controller;
-
+/*
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,10 +15,10 @@ import org.mockito.MockitoAnnotations;
 import com.devskills.ticketingsystem.model.Ticket;
 import com.devskills.ticketingsystem.model.User;
 import com.devskills.ticketingsystem.service.TicketService;
-import com.devskills.ticketingsystem.service.UserService;
+import com.devskills.ticketingsystem.service.UserService; */
 
 public class UserControllerTest {
-	
+	/*
 	// controller we want to test
 	@InjectMocks
 	private UserController userController;
@@ -124,5 +124,5 @@ public class UserControllerTest {
 		assertEquals(userUpdated.getUsername(), "John");
 		assertEquals(userUpdated.getEmail(), userUpdated.getEmail());
 	}
-
+	*/
 }

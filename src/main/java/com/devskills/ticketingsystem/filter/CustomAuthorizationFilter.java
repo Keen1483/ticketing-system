@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +23,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.devskills.ticketingsystem.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +35,16 @@ import static org.springframework.http.HttpHeaders.*;
 
 @Slf4j
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
+	
+	@Autowired
+	UserService userService;
+	
+	@Bean
+	FilterRegistrationBean<CustomAuthorizationFilter> myFilterRegistationBean() {
+		FilterRegistrationBean registration = new FilterRegistrationBean(new CustomAuthorizationFilter());
+		registration.setEnabled(false);
+		return registration;
+	}
 
 	@Override
 	protected void doFilterInternal(
@@ -59,10 +73,15 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 					SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 					
 					if (request.getServletPath().matches("/users/[0-9]+/ticket")) {
-						
+						Long userId = userService.getUser(username).getId();
+						Long requestId = Long.valueOf(request.getServletPath().substring(7, request.getServletPath().lastIndexOf("/")));
+						if (userId == requestId) {
+							filterChain.doFilter(request, response);
+						} else {
+							throw new Exception("you cannot acces to tickets of others users.");
+						}
 					}
 					
-					filterChain.doFilter(request, response);
 				} catch (Exception exception) {
 					log.error("Error logging in: {}", exception.getMessage());
 					response.setHeader("error", exception.getMessage());
