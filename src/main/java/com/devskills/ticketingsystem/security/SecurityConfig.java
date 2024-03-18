@@ -38,13 +38,26 @@ public class SecurityConfig {
 			.csrf(AbstractHttpConfigurer::disable)
 			.cors(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/login/**").permitAll()
-					.requestMatchers("/roles/**").permitAll()
-					.requestMatchers("/tickets/**").permitAll()
+					.requestMatchers(
+							"/login/**",
+							"/roles/**",
+							"/tickets/**"
+					).permitAll()
 					.requestMatchers(GET, "/users/token/refresh/**").permitAll()
 					.requestMatchers(GET, "/users").permitAll()
 					.requestMatchers(POST, "/users").permitAll()
 					.requestMatchers(PUT, "/users").permitAll()
+					.requestMatchers(
+							"/v3/api-docs",
+							"/v3/api-docs/**",
+							"/swagger-ressources",
+							"/swagger-ressources/**",
+							"/configuration/ui",
+							"/configuration/security",
+							"/swagger-ui/**",
+							"/webjars/**",
+							"/swagger-ui.html"
+					).permitAll()
 					.anyRequest().authenticated()
 			);
 		http.sessionManagement(sess -> sess.sessionCreationPolicy(STATELESS));

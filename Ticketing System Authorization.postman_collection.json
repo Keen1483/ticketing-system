@@ -21,13 +21,23 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:9000/login",
+					"raw": "localhost:9000/login?username=Jack&password=1234",
 					"host": [
 						"localhost"
 					],
 					"port": "9000",
 					"path": [
 						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Jack"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
 					]
 				}
 			},
@@ -41,7 +51,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKb2huIiwiZXhwIjoxNzEwNjg1NjM4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvbG9naW4iLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.pEg9X49pnfdrLFtRx7b5WteA__k62lvlncvn6SHD3mo",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYWNrIiwiZXhwIjoxNzEwNzQ5MTE1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvbG9naW4iLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.7sLAmx5W1r-K1_iBEd06nVczVoERmXnw5d1k5RDVLNs",
 							"type": "string"
 						}
 					]
@@ -66,6 +76,16 @@
 		{
 			"name": "Get tickets User 2",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYWNrIiwiZXhwIjoxNzEwNzQ5MTE1LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvbG9naW4iLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.7sLAmx5W1r-K1_iBEd06nVczVoERmXnw5d1k5RDVLNs",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {

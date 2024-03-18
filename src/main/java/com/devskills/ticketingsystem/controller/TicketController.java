@@ -121,8 +121,8 @@ public class TicketController {
 	}
 	
 	@Operation(
-			description = "Delete User",
-			summary = "Delete user by id",
+			description = "Delete Ticket",
+			summary = "Delete ticket by id",
 			responses = {
 					@ApiResponse(
 							description = "Ok",

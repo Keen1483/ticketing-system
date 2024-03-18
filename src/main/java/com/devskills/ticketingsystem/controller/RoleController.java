@@ -17,40 +17,90 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devskills.ticketingsystem.model.Role;
 import com.devskills.ticketingsystem.service.RoleService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/roles")
 @RequiredArgsConstructor
+@Tag(name = "Role")
 public class RoleController {
 	
 	private final RoleService roleService;
 	
-	// GET METHODS
+	@Operation(
+			description = "Get all roles",
+			summary = "Get all existing roles from database",
+			responses = {
+					@ApiResponse(
+							description = "Ok",
+							responseCode = "200"
+					)
+			}
+	)
 	@GetMapping("")
 	public ResponseEntity< List<Role> > getRoles() {
 		return ResponseEntity.ok().body(roleService.getRoles());
 	}
 	
+	@Operation(
+			description = "Get role by name",
+			summary = "Get specific role by name",
+			responses = {
+					@ApiResponse(
+							description = "Ok",
+							responseCode = "200"
+					)
+			}
+	)
 	@GetMapping("/{name}")
 	public ResponseEntity<Role> getRole(@PathVariable("name") String name) {
 		return ResponseEntity.ok().body(roleService.getRole(name));
 	}
 	
-	// POST METHODS
+	@Operation(
+			description = "Create role",
+			summary = "Add new role in the database",
+			responses = {
+					@ApiResponse(
+							description = "Created",
+							responseCode = "201"
+					)
+			}
+	)
 	@PostMapping("")
 	public ResponseEntity<Role> saveRole(@RequestBody Role role) {
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/roles").toUriString());
 		return ResponseEntity.created(uri).body(roleService.saveRole(role));
 	}
 	
-	// PUT METHODS
+	@Operation(
+			description = "Update role",
+			summary = "Update existing role in the database",
+			responses = {
+					@ApiResponse(
+							description = "Ok",
+							responseCode = "200"
+					)
+			}
+	)
 	@PutMapping("/edit/{id}")
 	public ResponseEntity<Role> updateRole(@PathVariable("id") Long id, @RequestBody Role role) {
 		return ResponseEntity.ok().body(roleService.updateRole(id, role));
 	}
 	
-	// DELETE METHODS
+	@Operation(
+			description = "Delete role",
+			summary = "Delete role by name",
+			responses = {
+					@ApiResponse(
+							description = "Ok",
+							responseCode = "200"
+					)
+			}
+	)
 	@DeleteMapping("/delete/{name}")
 	public ResponseEntity<?> deleteRole(@PathVariable("name") String name) {
 		roleService.deleteRole(name);

@@ -25,11 +25,11 @@ public class TicketingSystemApplication {
 			roleService.saveRole(new Role(null, "user", null));
 			roleService.saveRole(new Role(null, "admin", null));
 			
-			userService.save(new User(null, "John", "john@mail.com", "1234"));
-			userService.save(new User(null, "Jane", "jane@mail.com", "1234"));
+			userService.save(new User(null, "Jack", "jack@mail.com", "1234"));
+			userService.save(new User(null, "Max", "max@mail.com", "1234"));
 			
-			ticketService.save(new Ticket(null, "Ticket 1", "Description ticket 1", null));
-			ticketService.save(new Ticket(null, "Ticket 2", "Description ticket 2", null));
+			ticketService.save(new Ticket(null, "Ticket 3", "Description ticket 3", null));
+			ticketService.save(new Ticket(null, "Ticket 4", "Description ticket 4", null));
 			ticketService.assignTicket(1L, 1L);
 			ticketService.assignTicket(2L, 2L);
 		};
